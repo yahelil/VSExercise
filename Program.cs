@@ -76,6 +76,55 @@ namespace Exercise
             }
             return p2;
         }
+        //Page 95 - exercise 29
+        //A function that gets a list and says how many series in right order (a follow list) there is(every series is evided by -999)
+        public static int NumOfOrderedList(Node<int> L)
+        {
+            Node<int> p1 = L;
+            Node<int> p2 = L.Getnext();
+            bool is_follow = true;
+            int count = 0;
+            while (p2 != null)
+            {
+                if (p1.Getvalue() >= p2.Getvalue())
+                {
+                    while (p2.Getvalue() != -999)
+                    {
+                        if (p1.Getvalue() <= p2.Getvalue())
+                        {
+                            is_follow = false;
+                        }
+                        if(p2.Getnext().Getvalue() == -999 && is_follow)
+                        {
+                            count++;
+                        }
+                        p1 = p2;
+                        p2 = p2.Getnext();
+                    }
+                    p1 = p2;
+                    p2 = p2.Getnext();
+                }
+                else
+                {
+                    while (p2.Getvalue() != -999)
+                    {
+                        if (p1.Getvalue() >= p2.Getvalue())
+                        {
+                            is_follow = false;
+                        }
+                        if (p2.Getnext().Getvalue() == -999 && is_follow)
+                        {
+                            count++;
+                        }
+                        p1 = p2;
+                        p2 = p2.Getnext();
+                    }
+                    p1 = p2;
+                    p2 = p2.Getnext();
+                }
+            }
+            return count;
+        }
         /*
         //page 95 - exercise 30
         //A
